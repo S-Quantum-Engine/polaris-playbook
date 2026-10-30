@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Polaris CoPilot Playbook</title>
+<meta name="description" content="The user guide to Polaris CoPilot — your CXO-facing BI copilot. Capabilities, example prompts, roles, and FAQ." />
+
+<link rel="icon" href="assets/polaris-mark.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="tokens.css" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="scroll-progress" id="scroll-progress"></div>
+<header class="topbar">
+  <a class="topbar-brand" href="#top">
+    <img class="logo-light" src="assets/polaris-logo-full.svg" alt="Polaris" />
+    <img class="logo-dark" src="assets/polaris-logo-full-dark.svg" alt="Polaris" />
+    <span class="topbar-tag">Playbook</span>
+  </a>
+  <div class="topbar-actions">
+    <button class="icon-btn" id="toc-toggle" aria-label="Toggle contents">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+    </button>
+    <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="shell" id="top">
+  <nav class="toc" id="toc">
+    <p class="toc-label">On this page</p>
+    <a href="#getting-started">Getting started</a>
+    <a href="#capabilities">Core capabilities</a>
+    <a href="#feature-tour">Feature tour</a>
+    <a href="#prompting">Writing good prompts</a>
+    <a href="#roles">Roles &amp; permissions</a>
+    <a href="#governance">Access &amp; governance</a>
+    <a href="#architecture">Architecture &amp; data handling</a>
+    <a href="#faq">FAQ</a>
+    <a href="#glossary">Glossary</a>
+  </nav>
+
+  <main class="content">
+
+    <section class="hero">
+      <span class="hero-eyebrow">★ Polaris by SQE</span>
+      <h1>Everything you need to get answers out of Polaris, faster.</h1>
+      <p class="lead">
+        Polaris is an AI analytics platform for finance and business leaders. Ask a question about your
+        company's financial and operational data in plain language, and get back answers as text, tables
+        and charts — then turn those answers into dashboards, written reports and alerts. It works like a
+        familiar AI chat assistant, with one difference: answers come from your own data, not the model's memory.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#getting-started">Get started</a>
+        <a class="btn btn-secondary" href="#capabilities">Browse capabilities</a>
+      </div>
+      <div class="doc-provenance">
+        Built from <strong>Polaris Product Documentation v1.0</strong> · Doc No. SQE/02/OTH/2026/10/0014 · Effective 7 Oct 2026
+      </div>
+    </section>
+
+    <!-- ===================== GETTING STARTED ===================== -->
+    <section class="panel" id="getting-started">
+      <div class="panel-head">
+        <p class="kicker">Start here</p>
+        <h2>Getting started</h2>
+        <p>Four steps from first login to your first answered question.</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <strong>Sign in</strong>
+            <span>Use the activation link your admin emailed you to set a password, then sign in. If you don't have an account yet, ask your workspace Admin to invite you.</span>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <strong>Check your folder access</strong>
+            <span>Polaris scopes data by folder. You'll only be able to query the warehouse data your Admin has granted to a folder you belong to — ask them if a dataset you expect to see is missing.</span>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <div class="step-body">
+            <strong>Open Explore and ask a question</strong>
+            <span>Type a question the way you'd ask a colleague — "What was revenue by region last quarter?" Polaris plans the query, runs it read-only against your warehouse, and answers with a chart or table plus its reasoning in the Tools Timeline.</span>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">4</span>
+          <div class="step-body">
+            <strong>Save, pin, and share what's useful</strong>
+            <span>Turn a good answer into a saved Chart, add it to a Dashboard, wire it to an Alert, or ask Polaris to narrate it into a Story — all from the same conversation.</span>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===================== CAPABILITIES ===================== -->
+    <section class="panel" id="capabilities">
+      <div class="panel-head">
+        <p class="kicker">What Polaris can do</p>
+        <h2>Core capabilities</h2>
+        <p>Two rules apply to every feature below: your <strong>role</strong> decides what you can do, and your <strong>data access</strong> (folders) decides which data you can see. Both always apply.</p>
+      </div>
+      <div class="grid">
+
+        <div class="card">
+          <div class="card-icon">🔌</div>
+          <h3>Data Connection</h3>
+          <p>Bring in data from a data warehouse (BigQuery, Databricks, Snowflake, Amazon Redshift) or a CSV/XLSX file. Warehouse access is always read-only — Polaris can never change or delete source data.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📚</div>
+          <h3>Knowledge Base</h3>
+          <p>Teach CoPilot the business and control who sees which data. Unit and formula documentation means CoPilot doesn't guess what a number means — it picks the right table and applies the same formula every time.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">💬</div>
+          <h3>CoPilot</h3>
+          <p>AI assistant: Q&amp;A, competitive benchmark, forecast, file upload. Figures always come from a query on your data, never from the model's memory.</p>
+          <ul class="prompt-list">
+            <li>"What was net profit for Jakarta Region in Q2 versus budget?"</li>
+            <li>"How does our margin compare to industry benchmarks?"</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3>Charts</h3>
+          <p>See any figure as a chart, including custom chart types. A chart only draws what the query already returned — it never calculates or adjusts a value itself.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🗂️</div>
+          <h3>Dashboard</h3>
+          <p>Keep charts and tables together in one view. If a dashboard includes a chart built on data you can't see, that chart simply isn't shown to you.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📰</div>
+          <h3>Story</h3>
+          <p>Get a written, board-ready report built from charts or dashboards. A Story is a snapshot until refreshed — numbers don't change automatically when the underlying data does.</p>
+          <ul class="prompt-list">
+            <li>"Turn the Q3 Board Dashboard into a Story"</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🧭</div>
+          <h3>Multi Agents</h3>
+          <p>Choose a specialist AI agent to chat with, e.g. a Cash Flow Analyst. An agent works within the role and data access of whoever is chatting with it — never more than that user can see.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🔔</div>
+          <h3>Alert</h3>
+          <p>Get notified when a number crosses a threshold. Notifications are sent through WhatsApp as a link only — no company data is ever included in the message.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🔐</div>
+          <h3>RBAC</h3>
+          <p>Control who can see and do what, across four roles: Super Admin, Admin, Editor and Viewer. See the full breakdown in <a href="#roles">Roles &amp; permissions</a>.</p>
+        </div>
+
+      </div>
+
+      <div class="callout" style="margin-top: var(--hz-space-6)">
+        <strong style="flex:none">What Polaris does not do:</strong>
+        <span>It does not change source data — data warehouse connections are read-only. And it does not give users direct access to the data warehouse — you reach data only through Polaris, within your own data access.</span>
+      </div>
+    </section>
+
+    <!-- ===================== FEATURE TOUR ===================== -->
+    <section class="panel" id="feature-tour">
+      <div class="panel-head">
+        <p class="kicker">See it in action</p>
+        <h2>Feature tour</h2>
+        <p>Nine building blocks. Each demo below recreates the actual screen and interaction from the product (not a generic mockup) — click a chip, a switch, or a button to see it move.</p>
+      </div>
+
+      <div class="tour">
+
+        <!-- 1. Data Connection -->
+        <div class="tour-item">
+          <div class="tour-text">
+            <span class="tour-kicker">01 · Data Connection</span>
+            <h3>Data Connection</h3>
+            <p>Bring in data from a data warehouse (BigQuery, Databricks, Snowflake, Amazon Redshift) or a CSV/XLSX file. This is the real Context ▸ Data schema tree — pick a provider to see it relabel.</p>
+            <div class="tour-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              Click a source chip
+            </div>
+          </div>
+          <div class="demo-frame">
+            <div class="chip-row" id="dc-chips">
+              <span class="chip is-active" data-src="bigquery">BigQuery</span>
+              <span class="chip" data-src="databricks">Databricks</span>
+              <span class="chip" data-src="snowflake">Snowflake</span>
+              <span class="chip" data-src="redshift">Redshift</span>
+              <span class="chip" data-src="file">CSV / XLSX</span>
+            </div>
+            <div class="dc-provider-row">
+              <span class="dc-badge" id="dc-badge">BQ</span>
+              <span id="dc-label">star-capital-analytics</span>
+              <span class="dc-count">4 datasets</span>
+            </div>
+            <div class="dc-tree">
+              <div class="dc-ds-row">📦 sqe_finance <span class="dc-tables">2 tables</span></div>
+              <div class="dc-tbl-row">▦ transactions <span class="dc-rows">4.2M rows</span> <span class="dc-pill">Unassigned ▾</span></div>
+              <div class="dc-tbl-row">▦ accounts <span class="dc-rows">18K rows</span> <span class="dc-pill">Finance ▾</span></div>
+              <div class="dc-ds-row">📦 sqe_operations <span class="dc-tables">2 tables</span></div>
+              <div class="dc-tbl-row">▦ employees <span class="dc-rows">2.1K rows</span> <span class="dc-pill">Unassigned ▾</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Knowledge Base -->
+        <div class="tour-item">
+          <div class="tour-text">
+            <span class="tour-kicker">02 · Knowledge Base</span>
+            <h3>Knowledge Base</h3>
+            <p>Teach CoPilot the business and control who sees which data. This is the real Context ▸ Documents row — flip the switch to publish a draft.</p>
+            <div class="tour-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              Click the status switch
+            </div>
+          </div>
+          <div class="demo-frame">
+            <div class="kb-row">
+              <div class="kb-icon">📄</div>
+              <div class="kb-meta">
+                <b>Revenue Recognition</b>
+                <span>Net revenue excludes one-time setup fees, recognized separately over the contract term.</span>
+              </div>
+              <span class="kb-scope">1 Folder</span>
+              <span class="kb-status draft" id="kb-status">Draft</span>
+              <button class="kb-switch" id="kb-switch" aria-label="Publish"></button>
+            </div>
+            <div class="kb-divider"></div>
+            <div class="kb-row">
+              <div class="kb-icon">📄</div>
+              <div class="kb-meta">
+                <b>Metrics Glossary</b>
+                <span>Canonical definitions for EBITDA, EBIT, COGS, AUM, GMV, claims ratio.</span>
+              </div>
+              <span class="kb-scope">All</span>
+              <span class="kb-status active">Active</span>
+              <button class="kb-switch is-active" aria-label="Published"></button>
+            </div>
+            <div class="kb-note">🔒 Viewers get read-only access — only Admins and Editors can publish a change.</div>
+          </div>
+        </div>
+
+        <!-- 3. CoPilot -->
+        <div class="tour-item">
+          <div class="tour-text">
+            <span class="tour-kicker">03 · CoPilot</span>
+            <h3>CoPilot</h3>
+            <p>The AI assistant: Q&amp;A, competitive benchmark, forecast, file upload. This recreates a real Explore answer — pick a specialist, open the Tools Timeline, or tap a follow-up.</p>
+            <div class="tour-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              Open the timeline, try a follow-up
+            </div>
+          </div>
+          <div class="demo-frame">
+            <div class="cp-crew-row" id="cp-crew-row">
+              <span class="cp-avatar is-active" data-crew="analyst"><span class="cp-initials" style="background:var(--hz-blue-500)">AN</span>Analyst</span>
+              <span class="cp-avatar" data-crew="cfo"><span class="cp-initials" style="background:var(--hz-green-500)">CF</span>CFO</span>
+              <span class="cp-avatar" data-crew="cmo"><span class="cp-initials" style="background:var(--hz-magenta-400)">CM</span>CMO</span>
+            </div>
+            <p class="cp-answer" id="cp-answer">Q3 gross margin was 61.4%, about 4pts above the SaaS benchmark I pulled from your last board deck + public filings.</p>
+            <div class="cp-insight">
+              <b>💡 Group Snapshot</b>
+              <span>Group YTD revenue: IDR 14,020B (+12.3% YoY). Financial services account for 55% of total.</span>
+            </div>
+            <div class="cp-timeline-toggle" id="cp-toggle">▸ Show reasoning (3 steps)</div>
+            <div class="cp-steps" id="cp-steps">
+              <div class="cp-step"><span class="cp-step-dot">✓</span><b>Reading</b>&nbsp;— searched schema, found <code>finance.margin_monthly</code></div>
+              <div class="cp-step"><span class="cp-step-dot">✓</span><b>Composing</b>&nbsp;— ran read-only SQL, scoped to your Finance folder</div>
+              <div class="cp-step"><span class="cp-step-dot">✓</span><b>Creating chart</b>&nbsp;— benchmarked vs. web search + uploaded deck</div>
+            </div>
+            <div class="cp-followups">
+              <span class="cp-followup">↻ Show year-over-year growth for each BU</span>
+              <span class="cp-followup">↻ Which BU has the highest margin?</span>
+            </div>
+            <div class="cp-composer">
+              <div class="cp-placeholder">Ask <span id="cp-composer-name">Analyst</span> a follow-up... @ mentions a file or specialist</div>
+              <div class="cp-composer-row">
+                <span class="cp-agent-pill"><span class="cp-initials" style="width:16px;height:16px;font-size:8px;background:var(--hz-blue-500)" id="cp-composer-dot">AN</span><span id="cp-composer-pill-name">Analyst</span></span>
+                <button class="cp-send">→</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Charts -->
+        <div class="tour-item">
+          <div class="tour-text">
+            <span class="tour-kicker">04 · Charts</span>
+            <h3>Charts</h3>
+            <p>See any figure as a chart, including custom chart types. These are the real dashboard KPI tiles — click one to swap the chart below it, or switch chart type directly.</p>
+            <div class="tour-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              Click a KPI tile
+            </div>
+          </div>
+          <div class="demo-frame">
+            <div class="kpi-row" id="kpi-row">
+              <div class="kpi-tile is-active" data-kpi="revenue">
+                <div class="kpi-icon" style="background:var(--hz-blue-50); color:var(--hz-blue-700)">📈</div>
+                <div class="kpi-label">Revenue YTD</div>
+                <div class="kpi-value">IDR 4,521B</div>
+                <div class="kpi-trend up">↑ +12.3% YoY</div>
+              </div>
+              <div class="kpi-tile" data-kpi="ebitda">
+                <div class="kpi-icon" style="background:var(--hz-green-50); color:var(--hz-green-700)">%</div>
+                <div class="kpi-label">EBITDA</div>
+                <div class="kpi-value">IDR 1,109B</div>
+                <div class="kpi-trend up">↑ +8.7% YoY</div>
+              </div>
+            </div>
+            <span class="chart-type-badge" id="chart-badge">Comparison · Bar</span>
+            <div class="chip-row" id="chart-chips" style="margin-bottom:10px">
+              <span class="chip is-active" data-chart="bar">Bar</span>
+              <span class="chip" data-chart="line">Line</span>
+              <span class="chip" data-chart="area">Area</span>
+            </div>
+            <div class="chart-demo" id="chart-demo"></div>
+          </div>
+        </div>
+
+        <!-- 5. Dashboard -->
+        <div class="tour-item">
+          <div class="tour-text">
+            <span class="tour-kicker">05 · Dashboard</span>
+            <h3>Dashboard</h3>
+            <p>Keep charts and tables together in one view. This mirrors the real dashboard's tab bar — switch between Finance, Operations and People to swap the KPI grid underneath.</p>
+            <div class="tour-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              Switch a tab
+            </div>
+          </div>
+          <div class="demo-frame">
+            <div class="dash-tabs" id="dash-tabs">
+              <span class="dash-tab is-active" data-tab="finance">Finance</span>
+              <span class="dash-tab" data-tab="ops">Operations</span>
+              <span class="dash-tab" data-tab="people">People</span>
+            </div>
+            <div class="dash-grid" id="dash-grid"></div>
+          </div>
+        </div>
+
+        <!-- 6. Story -->
+        <div class="tour-item">
+          <div class="tour-text">
+            <span class="tour-kicker">06 · Story</span>
+            <h3>Story</h3>
+            <p>Get a written, board-ready report built from charts or dashboards. Ask Polaris to revise it in chat and the whole narrative updates — not just one line.</p>
+            <div class="tour-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              Click "Revise"
+            </div>
+          </div>
+          <div class="demo-frame">
+            <span class="story-tag">Board-ready</span>
+            <div class="story-doc">
+              <h4>Q3 Board Update</h4>
+              <p id="story-text" class="story-fade">Revenue grew steadily this quarter, with margin holding firm despite modest headwinds in churn.</p>
+              <button class="btn btn-secondary" id="story-revise" style="margin-top:12px; height:32px; padding:0 14px; font-size:12.5px">✎ Revise: "lead with churn"</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Multi Agents -->
+        <div class="tour-item">
+          <div class="tour-text">
+            <span class="tour-kicker">07 · Multi Agents</span>
+            <h3>Multi Agents</h3>
+            <p>Choose a specialist AI agent to chat with. This is the real AI Agents roster — each card lists its always-on and on-demand skills. A persona changes emphasis, never data access.</p>
+            <div class="tour-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              Pick an agent
+            </div>
+          </div>
+          <div class="demo-frame">
+            <div class="agent-picker" id="agent-picker">
+              <span class="cp-avatar is-active" data-agent="analyst"><span class="cp-initials" style="background:var(--hz-blue-500)">AN</span>Analyst</span>
+              <span class="cp-avatar" data-agent="cfo"><span class="cp-initials" style="background:var(--hz-green-500)">CF</span>CFO</span>
+              <span class="cp-avatar" data-agent="growth"><span class="cp-initials" style="background:var(--hz-purple-500)">GR</span>Growth</span>
+            </div>
+            <div class="agent-card is-shown" data-agent-card="analyst">
+              <div class="agent-card-head"><span class="cp-initials" style="background:var(--hz-blue-500)">AN</span><b>Analyst</b><span class="agent-default">DEFAULT</span></div>
+              <p>The workspace generalist — cross-BU, data-first, no opinion on strategy.</p>
+              <div class="agent-skill-group-label">Always on</div>
+              <div class="agent-skills"><span class="agent-skill"><span class="dot"></span>SQL query authoring</span><span class="agent-skill"><span class="dot"></span>Chart choice</span></div>
+              <div class="agent-skill-group-label">On demand</div>
+              <div class="agent-skills"><span class="agent-skill">Executive summary</span><span class="agent-skill">Variance commentary</span></div>
+            </div>
+            <div class="agent-card" data-agent-card="cfo">
+              <div class="agent-card-head"><span class="cp-initials" style="background:var(--hz-green-500)">CF</span><b>CFO</b></div>
+              <p>Reads the business as capital allocation, margin, cash and payback.</p>
+              <div class="agent-skill-group-label">Always on</div>
+              <div class="agent-skills"><span class="agent-skill"><span class="dot"></span>Variance commentary</span><span class="agent-skill"><span class="dot"></span>Forecast bridge</span></div>
+              <div class="agent-skill-group-label">On demand</div>
+              <div class="agent-skills"><span class="agent-skill">Cash runway</span></div>
+            </div>
+            <div class="agent-card" data-agent-card="growth">
+              <div class="agent-card-head"><span class="cp-initials" style="background:var(--hz-purple-500)">GR</span><b>Growth</b></div>
+              <p>Looks for the signal behind the number — cohorts, funnels, retention.</p>
+              <div class="agent-skill-group-label">Always on</div>
+              <div class="agent-skills"><span class="agent-skill"><span class="dot"></span>Cohort breakdown</span><span class="agent-skill"><span class="dot"></span>Funnel analysis</span></div>
+              <div class="agent-skill-group-label">On demand</div>
+              <div class="agent-skills"><span class="agent-skill">Retention curves</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Alert -->
+        <div class="tour-item">
+          <div class="tour-text">
+            <span class="tour-kicker">08 · Alert</span>
+            <h3>Alert</h3>
+            <p>Get notified when a number crosses a threshold. This is the real Alerts feed — severity-coded by colour, newest on top. Simulate a breach to see a new one arrive.</p>
+            <div class="tour-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              Click "Simulate threshold breach"
+            </div>
+          </div>
+          <div class="demo-frame">
+            <div class="alert-feed" id="alert-feed">
+              <div class="alert-row warning">
+                <div class="alert-main">
+                  <span class="alert-title">COGS variance exceeds forecast by 12%</span>
+                  <span class="alert-sub">Warning · SQE · Procurement <span class="meta">· 1 hour ago</span></span>
+                </div>
+                <span class="alert-unread"></span>
+              </div>
+              <div class="alert-row info">
+                <div class="alert-main">
+                  <span class="alert-title">Weekly C-Level summary is ready</span>
+                  <span class="alert-sub">Info · Polaris <span class="meta">· Yesterday</span></span>
+                </div>
+              </div>
+            </div>
+            <button class="alert-sim-btn" id="alert-sim">⚡ Simulate threshold breach</button>
+          </div>
+        </div>
+
+        <!-- 9. RBAC -->
+        <div class="tour-item">
+          <div class="tour-text">
+            <span class="tour-kicker">09 · RBAC</span>
+            <h3>RBAC</h3>
+            <p>Control who can see and do what. This mirrors the real User Management row — switch roles to see the pill and permissions change, exactly as they would for that person.</p>
+            <div class="tour-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+              Switch roles
+            </div>
+          </div>
+          <div class="demo-frame">
+            <div class="rbac-tabs" id="rbac-roles">
+              <span class="chip" data-role="viewer">Viewer</span>
+              <span class="chip is-active" data-role="editor">Editor</span>
+              <span class="chip" data-role="admin">Admin</span>
+              <span class="chip" data-role="superadmin">SuperAdmin</span>
+            </div>
+            <div class="rbac-user-row">
+              <span class="rbac-avatar" id="rbac-avatar">AT</span>
+              <div class="rbac-id"><b>Andrew Tanu</b><span>andrew.tanu@sqe.co.id</span></div>
+              <span class="rbac-role-pill" id="rbac-pill">Editor</span>
+            </div>
+            <table class="rbac-mini-table" id="rbac-table">
+              <tr><td>View charts &amp; dashboards</td><td data-cap="view">—</td></tr>
+              <tr><td>Create / edit charts</td><td data-cap="edit">—</td></tr>
+              <tr><td>Manage users &amp; connections</td><td data-cap="manage">—</td></tr>
+              <tr><td>Configure billing &amp; caps</td><td data-cap="billing">—</td></tr>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== PROMPTING ===================== -->
+    <section class="panel" id="prompting">
+      <div class="panel-head">
+        <p class="kicker">Get better answers</p>
+        <h2>Writing good prompts</h2>
+        <p>Polaris works best when you ask the way you'd brief a sharp analyst — specific, with the comparison and timeframe spelled out.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3>Name the metric and the timeframe</h3>
+          <p>"Revenue" over "how are we doing", "last quarter vs the prior one" over "recently".</p>
+        </div>
+        <div class="card">
+          <h3>Ask for the comparison you actually want</h3>
+          <p>By region, by segment, vs. target, vs. last year — Polaris will pick a reasonable default if you don't, but naming it gets you the right chart faster.</p>
+        </div>
+        <div class="card">
+          <h3>Iterate in the same thread</h3>
+          <p>"Now break that down by product line" reuses everything Polaris already resolved — the folder, the metric, the filters — instead of starting over.</p>
+        </div>
+        <div class="card">
+          <h3>Check the Tools Timeline</h3>
+          <p>Every answer shows the SQL Polaris ran and the schema it searched. If an answer looks off, that's the first place to look — and to correct it ("use the finance table, not the ops one").</p>
+        </div>
+      </div>
+      <div class="callout" style="margin-top: var(--hz-space-4)">
+        <strong style="flex:none">No warehouse connected?</strong>
+        <span>If your folder has no data source, Polaris says so plainly and answers only from attachments, context docs, and general knowledge — it never guesses at numbers it can't see.</span>
+      </div>
+    </section>
+
+    <!-- ===================== ROLES ===================== -->
+    <section class="panel" id="roles">
+      <div class="panel-head">
+        <p class="kicker">Who can do what</p>
+        <h2>Roles &amp; permissions</h2>
+        <p>RBAC decides what each person can do. Every request is checked against <strong>two layers</strong>, and both always apply: your <strong>role</strong> decides what you can do; your <strong>data access</strong> (folders) decides which data you can see. A role never grants data access by itself, and data access never grants extra abilities.</p>
+      </div>
+
+      <div class="grid" style="margin-bottom: var(--hz-space-6)">
+        <div class="card">
+          <h3>Super Admin</h3>
+          <p>Held by the Polaris product team (SQE), not the client. Manages users and billing only. <strong>No access to client data.</strong></p>
+        </div>
+        <div class="card">
+          <h3>Admin</h3>
+          <p>Full access to all features within their folders, including user management and giving users access to folders.</p>
+        </div>
+        <div class="card">
+          <h3>Editor</h3>
+          <p>Can create and edit content, and create folders and move data tables within their folders. No user management, no changes to user access.</p>
+        </div>
+        <div class="card">
+          <h3>Viewer</h3>
+          <p>Can view and chat with CoPilot. Cannot create, edit or delete anything.</p>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="hz-table">
+          <thead>
+            <tr><th>Feature</th><th>Super Admin</th><th>Admin</th><th>Editor</th><th>Viewer</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Data Connection</td><td class="rbac-no">No access</td><td class="rbac-yes">Create, edit, view</td><td class="rbac-yes">Create, edit, view</td><td class="rbac-no">No access</td></tr>
+            <tr><td>Knowledge Base: unit &amp; formula docs</td><td class="rbac-no">No access</td><td class="rbac-yes">Create, edit, view</td><td class="rbac-yes">Create, edit, view</td><td>Used by CoPilot, not shown</td></tr>
+            <tr><td>Knowledge Base: user access to folders</td><td class="rbac-no">No access</td><td class="rbac-yes">Edit, view</td><td class="rbac-no">No access</td><td class="rbac-no">No access</td></tr>
+            <tr><td>Folders &amp; data tables (create, move)</td><td class="rbac-no">No access</td><td class="rbac-yes">Create, edit, view</td><td class="rbac-yes">Create, edit, view</td><td>View only</td></tr>
+            <tr><td>CoPilot (Q&amp;A, Benchmark, Forecast)</td><td class="rbac-no">No access</td><td class="rbac-yes">Full</td><td class="rbac-yes">Full</td><td>Ask questions only</td></tr>
+            <tr><td>Charts</td><td class="rbac-no">No access</td><td class="rbac-yes">Create, edit, view</td><td class="rbac-yes">Create, edit, view</td><td>View only</td></tr>
+            <tr><td>Dashboard</td><td class="rbac-no">No access</td><td class="rbac-yes">Create, edit, view</td><td class="rbac-yes">Create, edit, view</td><td>View only</td></tr>
+            <tr><td>Story</td><td class="rbac-no">No access</td><td class="rbac-yes">Create, edit, view</td><td class="rbac-yes">Create, edit, view</td><td>View only</td></tr>
+            <tr><td>Multi Agents</td><td class="rbac-no">No access</td><td class="rbac-yes">Create, edit, use</td><td class="rbac-yes">Create, edit, use</td><td>Use only</td></tr>
+            <tr><td>Alert</td><td class="rbac-no">No access</td><td class="rbac-yes">Create, edit, view</td><td class="rbac-yes">Create, edit, view</td><td>View only</td></tr>
+            <tr><td>User Management</td><td class="rbac-yes">Create, edit, view</td><td class="rbac-yes">Create, edit, view</td><td class="rbac-no">No access</td><td class="rbac-no">No access</td></tr>
+            <tr><td>Billing</td><td>Edit, view</td><td>View only</td><td>View only</td><td>View only</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="color:var(--hz-text-secondary); font-size: var(--hz-text-body-r-size); margin-top: var(--hz-space-4)">
+        Admins, Editors and Viewers see and work only in the folders they've been given access to. Billing shows credit calculation only — never questions, answers or figures.
+      </p>
+    </section>
+
+    <!-- ===================== ACCESS & GOVERNANCE ===================== -->
+    <section class="panel" id="governance">
+      <div class="panel-head">
+        <p class="kicker">Chapter 3 · Data &amp; feature access control</p>
+        <h2>Access &amp; governance</h2>
+        <p>Who can use Polaris, which data each user can see, and how those limits are applied — enforced by Polaris on the server, for every request.</p>
+      </div>
+
+      <h3 style="font-size:15px; margin-bottom:10px">Access principles</h3>
+      <ul class="steps" style="margin-bottom: var(--hz-space-8)">
+        <li><span class="step-num">1</span><div class="step-body"><strong>Need to know</strong><span>A user gets only the features and data their work requires.</span></div></li>
+        <li><span class="step-num">2</span><div class="step-body"><strong>Unit isolation by default</strong><span>Each unit — department, branch or subsidiary — is a folder. A user sees only the folders an Admin has given them.</span></div></li>
+        <li><span class="step-num">3</span><div class="step-body"><strong>Access follows the folder tree</strong><span>Access to a folder includes everything inside it, including child folders.</span></div></li>
+        <li><span class="step-num">4</span><div class="step-body"><strong>Queries are limited to the user's data</strong><span>An answer, chart or report can never include data from folders the user has no access to.</span></div></li>
+        <li><span class="step-num">5</span><div class="step-body"><strong>The vendor role has no data access</strong><span>The Super Admin role, held by the SQE team, has no access to client data.</span></div></li>
+      </ul>
+
+      <h3 style="font-size:15px; margin-bottom:10px">The folder tree</h3>
+      <p style="color:var(--hz-text-secondary); margin-bottom:14px">Access is inherited <strong>downward only</strong>. Access to a child folder never grants access to its parent or to a sibling folder.</p>
+      <div class="demo-frame" style="margin-bottom:var(--hz-space-6)">
+        <ul class="folder-tree">
+          <li>🏢 Head Office
+            <ul>
+              <li>🏬 Finance Department</li>
+              <li>🏬 Technology Subsidiary</li>
+              <li>🏬 Jakarta Region
+                <ul>
+                  <li>📍 Sudirman Branch</li>
+                  <li>📍 Kelapa Gading Branch</li>
+                </ul>
+              </li>
+              <li>🏬 Surabaya Region
+                <ul>
+                  <li>📍 Tunjungan Branch</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="table-wrap" style="margin-bottom:var(--hz-space-8)">
+        <table class="hz-table">
+          <thead><tr><th>If the user has access to</th><th>The user can see</th></tr></thead>
+          <tbody>
+            <tr><td>Head Office</td><td>All departments, regions, branches and subsidiaries, plus Consolidated Data</td></tr>
+            <tr><td>Jakarta Region</td><td>Jakarta Region, including Sudirman and Kelapa Gading branches. Nothing in Surabaya Region</td></tr>
+            <tr><td>Sudirman Branch</td><td>Only Sudirman Branch</td></tr>
+            <tr><td>Technology Subsidiary</td><td>Only the subsidiary's folders and data. Nothing in Head Office, the other units, or Consolidated Data</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="font-size:15px; margin-bottom:10px">Managing folders and access</h3>
+      <div class="table-wrap" style="margin-bottom:var(--hz-space-8)">
+        <table class="hz-table">
+          <thead><tr><th>Action</th><th>Who can do it</th></tr></thead>
+          <tbody>
+            <tr><td>Give or remove a user's access to a folder</td><td>Admin only</td></tr>
+            <tr><td>Create a folder or sub-folder</td><td>Admin and Editor</td></tr>
+            <tr><td>Move a data table to another folder</td><td>Admin and Editor</td></tr>
+            <tr><td>View folders</td><td>All roles, limited to folders the user has access to</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="font-size:15px; margin-bottom:10px">How access is applied</h3>
+      <div class="table-wrap" style="margin-bottom:var(--hz-space-8)">
+        <table class="hz-table">
+          <thead><tr><th>Situation</th><th>What Polaris does</th></tr></thead>
+          <tbody>
+            <tr><td>A user asks about data in a folder they cannot access</td><td>Polaris blocks the query on the server. CoPilot tells the user they don't have access and directs them to their administrator</td></tr>
+            <tr><td>A dashboard contains a chart built on data the user cannot see</td><td>That chart is not shown to the user</td></tr>
+            <tr><td>A user refreshes a Story</td><td>The refresh uses the access of the user who runs it</td></tr>
+            <tr><td>A question needs public information from the web</td><td>Public information is available to all roles — the search receives only the query text, never tables, results or files</td></tr>
+            <tr><td>A user uploads a file in a chat</td><td>Not checked against data access rules, since the user supplies it. Used only in that chat session</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout" style="margin-bottom:var(--hz-space-6)">
+        <strong style="flex:none">Access by the Polaris team:</strong>
+        <span>Super Admin is held by SQE, not the client. It manages users and billing only, has no access to client data, and cannot grant itself access to client data. The billing screen shows credit calculation only — never questions, answers or figures.</span>
+      </div>
+
+      <h3 style="font-size:15px; margin-bottom:10px">Provisioning &amp; review responsibility</h3>
+      <div class="table-wrap">
+        <table class="hz-table">
+          <thead><tr><th>Activity</th><th>Responsibility</th></tr></thead>
+          <tbody>
+            <tr><td>Approving access requests, and keeping the record of approval</td><td>Client, usually by email</td></tr>
+            <tr><td>Reviewing who has access, and removing access no longer needed</td><td>Client</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="color:var(--hz-text-tertiary); font-size:12px; margin-top:var(--hz-space-3)">Polaris provides the controls — roles, the folder tree and User Management. It does not include an approval workflow, a scheduled access review, or a record of access changes; these stay the client's responsibility.</p>
+    </section>
+
+    <!-- ===================== ARCHITECTURE & DATA HANDLING ===================== -->
+    <section class="panel" id="architecture">
+      <div class="panel-head">
+        <p class="kicker">Chapter 4 · High-level architecture &amp; third-party interaction</p>
+        <h2>Architecture &amp; data handling</h2>
+        <p>Where Polaris runs, where data is stored and processed, and which third parties are involved.</p>
+      </div>
+
+      <div class="table-wrap" style="margin-bottom:var(--hz-space-6)">
+        <table class="hz-table">
+          <thead><tr><th>Part</th><th>What it does</th><th>Where it runs</th></tr></thead>
+          <tbody>
+            <tr><td>Polaris application</td><td>The web app and the logic behind it: users, roles, folders, CoPilot, charts, dashboards, Stories, alerts</td><td>Google Cloud Platform, in the client's or SQE's environment</td></tr>
+            <tr><td>Data warehouse</td><td>Google BigQuery for this deployment (Databricks, Snowflake, Redshift also supported). Read-only access</td><td>BigQuery: GCP, Indonesia. Other warehouses: client's environment</td></tr>
+            <tr><td>Anthropic Claude API</td><td>The AI models behind CoPilot, and web search</td><td>Anthropic — SG / JP or any region where Anthropic operates</td></tr>
+            <tr><td>AI models in trial</td><td>Models that can be hosted in Indonesia (Qwen, DeepSeek, Gemma). Under evaluation, not connected to client data</td><td>Separate test environment</td></tr>
+            <tr><td>WhatsApp messaging</td><td>Delivers alert links, sent directly to Meta</td><td>Meta</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure style="margin:0 0 var(--hz-space-8)">
+        <img src="assets/data-flows.png" alt="Polaris data flows — what is sent, to whom, and when" style="width:100%; border-radius:var(--hz-radius-lg); border:1px solid var(--hz-border-subtle)" />
+        <figcaption style="font-size:12px; color:var(--hz-text-tertiary); margin-top:8px; text-align:center">Figure 4.1 — How data moves through Polaris</figcaption>
+      </figure>
+
+      <h3 style="font-size:15px; margin-bottom:10px">Where data is stored and processed</h3>
+      <div class="table-wrap" style="margin-bottom:var(--hz-space-8)">
+        <table class="hz-table">
+          <thead><tr><th>Data</th><th>Where it is stored or processed</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr><td>Company data in the data warehouse</td><td>Google BigQuery, for this deployment</td><td>Indonesia</td></tr>
+            <tr><td>CSV/XLSX files uploaded through Data Connection</td><td>Deployment location</td><td>Indonesia</td></tr>
+            <tr><td>Polaris application data (users, roles, folders, charts, dashboards, Stories, conversations)</td><td>Polaris application database on GCP</td><td>Indonesia</td></tr>
+            <tr><td>Content sent to the AI model while it answers</td><td>Anthropic Claude API</td><td>SG / JP or any region where Anthropic operates</td></tr>
+            <tr><td>Local models (still in trial, not yet in production)</td><td>Separate test environment</td><td>Indonesia</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout" style="margin-bottom:var(--hz-space-8)">
+        <strong style="flex:none">Zero data retention:</strong>
+        <span>Polaris has a zero data retention (ZDR) agreement with Anthropic — Anthropic does not store prompts or responses at rest after the API response returns, and never uses Polaris data to train its models. Polaris uses only ZDR-eligible models: <strong>Claude Haiku 4.5, Claude Sonnet 5, and Claude Opus 5</strong>. Exceptions: the law may still require retention, and content flagged by Anthropic's trust &amp; safety systems may be kept up to 2 years.</span>
+      </div>
+
+      <h3 style="font-size:15px; margin-bottom:10px">Anthropic features used, and their ZDR status</h3>
+      <div class="table-wrap" style="margin-bottom:var(--hz-space-8)">
+        <table class="hz-table">
+          <thead><tr><th>Anthropic feature</th><th>Used by Polaris</th><th>ZDR status</th></tr></thead>
+          <tbody>
+            <tr><td>Messages API (questions, answers, tool calls)</td><td>Yes</td><td class="rbac-yes">Covered</td></tr>
+            <tr><td>Prompt caching</td><td>Yes</td><td class="rbac-yes">Covered — held in memory only, 5-minute lifetime</td></tr>
+            <tr><td>Web search</td><td>Yes</td><td class="rbac-yes">Covered</td></tr>
+            <tr><td>Files uploaded in a chat session (Files API)</td><td>Yes</td><td class="rbac-no">Not covered — kept until deleted or expired</td></tr>
+            <tr><td>Batch processing, code execution, MCP connector, Agent Skills, Managed Agents</td><td>No</td><td>Not used by Polaris</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid" style="margin-bottom:var(--hz-space-8)">
+        <div class="card">
+          <h3>Masking personal data at the source</h3>
+          <p>Clients can mask or exclude PII before it reaches Polaris, using the data source's own controls — column-level policy tags, dynamic data masking, or authorized views on the service account Polaris uses. Polaris does not mask uploaded CSV/XLSX content — remove or mask PII there before upload.</p>
+        </div>
+        <div class="card">
+          <h3>Models in trial <span class="story-tag" style="margin-left:6px">In trial</span></h3>
+          <p>SQE is trialling open-weight models that can be hosted in Indonesia — <strong>Qwen</strong> (Alibaba), <strong>DeepSeek</strong>, and <strong>Gemma</strong> (Google). The trial runs in a separate staging environment on SQE's internal data only — no client or production data. SQE will notify clients in writing, and update this documentation, before any trial model touches client data.</p>
+        </div>
+      </div>
+
+      <h3 style="font-size:15px; margin-bottom:10px">Web search</h3>
+      <p style="color:var(--hz-text-secondary); margin-bottom:14px">Used for competitive benchmarks: CoPilot decides a question needs public context, Claude writes a search query from your business context, Anthropic runs the search and returns results, and Claude writes the answer with cited sources. Switched on by your organization's administrator in the Anthropic console. The basic web search tool is covered by ZDR — Anthropic does not store the request or results after the response returns.</p>
+
+      <h3 style="font-size:15px; margin-bottom:10px">Encryption</h3>
+      <div class="table-wrap" style="margin-bottom:var(--hz-space-8)">
+        <table class="hz-table">
+          <thead><tr><th>Where</th><th>Standard</th></tr></thead>
+          <tbody>
+            <tr><td>User browser to Polaris</td><td>HTTPS only (TLS)</td></tr>
+            <tr><td>Polaris to Anthropic</td><td>TLS 1.2 or higher</td></tr>
+            <tr><td>Inside Anthropic, at rest</td><td>AES-256 disk encryption — applies to Files API uploads and anything retained under the ZDR exceptions</td></tr>
+            <tr><td>Polaris database and uploaded files at rest</td><td>AES-256, Google Cloud's default encryption at rest</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="font-size:15px; margin-bottom:10px">Third parties &amp; sub-processors</h3>
+      <div class="table-wrap" style="margin-bottom:var(--hz-space-6)">
+        <table class="hz-table">
+          <thead><tr><th>Third party</th><th>Purpose</th><th>Data shared</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr><td>Anthropic</td><td>AI models and web search</td><td>Prompts needed to answer questions; for web search, only the query text. Not stored after the response (ZDR), except chat-session file uploads (Files API, outside ZDR)</td><td>Outside Indonesia, any Anthropic region</td></tr>
+            <tr><td>Google Cloud Platform</td><td>Hosts the Polaris application and the BigQuery warehouse</td><td>Company data and Polaris application data</td><td>Indonesia</td></tr>
+            <tr><td>Meta (WhatsApp)</td><td>Sends alert links, directly</td><td>Recipient phone number and a link — no company data</td><td>Indonesia (requests may transit non-Indonesian servers for up to 60 minutes)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="color:var(--hz-text-secondary); font-size:var(--hz-text-body-r-size)">
+        <strong>Provider assurance:</strong> Anthropic holds ISO 27001:2022, ISO/IEC 42001:2023 (AI management), SOC 2 Type I and Type II, and a HIPAA-ready configuration. These certify Anthropic's own controls and do not replace Polaris's — Anthropic provides its compliance documents on request through its Trust Portal.
+      </p>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section class="panel" id="faq">
+      <div class="panel-head">
+        <p class="kicker">Common questions</p>
+        <h2>FAQ</h2>
+      </div>
+      <div class="faq">
+        <details class="faq-item">
+          <summary>Does Polaris ever write to my data warehouse?</summary>
+          <p>No. Data warehouse connections are read-only — Polaris can read connected tables but cannot change or delete data in the warehouse. It can only create or edit objects inside Polaris itself: charts, dashboards, alerts, Stories and the Knowledge Base.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why can't I see a dataset I know exists?</summary>
+          <p>Data access is folder-scoped, and access only flows downward — a folder you're assigned to, plus everything inside it. Access never passes upward or sideways, so being inside one branch's folder tells you nothing about a sibling branch. Ask your Admin to grant you the right folder.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can Polaris search the public internet?</summary>
+          <p>Yes, for competitive benchmarks — switched on by your organization's administrator in the Anthropic console. Only public information is used, it never replaces your own figures, and every answer cites its sources with links.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens when I refresh a Story?</summary>
+          <p>A Story is a snapshot until refreshed — its numbers don't update automatically when the underlying data changes. Refreshing re-fetches the latest data and regenerates the Story's charts, numbers and analysis, using the access of whoever runs the refresh. Hand-edited text is overwritten by a refresh, and earlier versions aren't kept — export a copy first if you need the record.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is it safe to upload a file to CoPilot in a chat?</summary>
+          <p>Chat uploads are meant for public or competitor material — an annual report, an industry study, a screenshot to imitate. They're used only within that chat session, aren't checked against your data access (since you supplied the file), and are stored with Anthropic through its Files API, which sits outside the zero-data-retention agreement. Sensitive company data should go through Data Connection instead, where it stays governed by folder access.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ===================== GLOSSARY ===================== -->
+    <section class="panel" id="glossary">
+      <div class="panel-head">
+        <p class="kicker">Terms</p>
+        <h2>Glossary</h2>
+      </div>
+      <dl class="glossary">
+        <div><dt>Polaris</dt><dd>The AI analytics platform described in this playbook.</dd></div>
+        <div><dt>CoPilot</dt><dd>The AI assistant inside Polaris that answers questions and creates charts, dashboards, Stories, alerts and agents.</dd></div>
+        <div><dt>Agent</dt><dd>A specialist AI assistant, created inside CoPilot, that a user chooses to chat with.</dd></div>
+        <div><dt>Story</dt><dd>A written report built from charts or dashboards.</dd></div>
+        <div><dt>Knowledge Base</dt><dd>Business and formula documents that CoPilot reads, plus the folders that control data access.</dd></div>
+        <div><dt>Folder</dt><dd>A container that holds data tables, charts, dashboards and Stories. Folders sit in a tree and control who can see what is inside them.</dd></div>
+        <div><dt>Claude</dt><dd>The family of AI models from Anthropic that powers CoPilot.</dd></div>
+        <div><dt>Unit</dt><dd>A part of the organisation whose data is held in Polaris — a department, region, branch or subsidiary. Each unit is a folder.</dd></div>
+        <div><dt>BigQuery (BQ)</dt><dd>Google's cloud data warehouse, where Polaris data is stored and queried.</dd></div>
+        <div><dt>RBAC</dt><dd>Role-Based Access Control. Decides what each user can do.</dd></div>
+        <div><dt>Super Admin</dt><dd>A role held by the SQE Team that manages users and billing only, with no access to client data.</dd></div>
+        <div><dt>Consolidated Data</dt><dd>Figures and KPIs that combine all units. Stored in the Head Office folder.</dd></div>
+        <div><dt>SQE Team</dt><dd>The product and engineering team that builds and operates Polaris.</dd></div>
+      </dl>
+    </section>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  Polaris CoPilot Playbook — a living guide. Spot something out of date? Open an issue or a PR against this page.
+</footer>
+
+<script>
+  // Theme toggle — defaults to the system preference, remembers an explicit choice.
+  (function () {
+    var KEY = 'polaris-playbook-theme';
+    var saved = localStorage.getItem(KEY);
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved === 'dark' || (!saved && prefersDark)) document.body.classList.add('hz-dark');
+    document.getElementById('theme-toggle').addEventListener('click', function () {
+      document.body.classList.toggle('hz-dark');
+      localStorage.setItem(KEY, document.body.classList.contains('hz-dark') ? 'dark' : 'light');
+    });
+  })();
+
+  // Mobile TOC toggle
+  (function () {
+    var toc = document.getElementById('toc');
+    document.getElementById('toc-toggle').addEventListener('click', function () {
+      toc.classList.toggle('open');
+    });
+    toc.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { toc.classList.remove('open'); });
+    });
+  })();
+
+  // Scroll progress bar — fraction of the page read so far.
+  (function () {
+    var bar = document.getElementById('scroll-progress');
+    function update() {
+      var h = document.documentElement;
+      var scrolled = h.scrollTop;
+      var max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? (scrolled / max) * 100 : 0) + '%';
+    }
+    document.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+
+  // Reveal-on-scroll — sections, cards and tour items fade/slide up once, when they enter view.
+  (function () {
+    var targets = document.querySelectorAll(
+      'section.panel .panel-head, .card, .tour-item, .steps > li, .table-wrap, .faq-item, .glossary > div'
+    );
+    if (!targets.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      targets.forEach(function (t) { t.classList.add('reveal', 'is-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    targets.forEach(function (t, i) {
+      t.classList.add('reveal');
+      t.style.transitionDelay = Math.min(i % 4, 3) * 60 + 'ms';
+      io.observe(t);
+    });
+  })();
+
+  // Scrollspy — highlight the TOC entry for the section in view.
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+    var sections = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var idx = sections.indexOf(entry.target);
+        if (idx === -1) return;
+        if (entry.isIntersecting) {
+          links.forEach(function (l) { l.classList.remove('active'); });
+          links[idx].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(function (s) { if (s) io.observe(s); });
+  })();
+
+  // ===================== Feature tour interactions =====================
+  // Each widget recreates a real screen's markup/behaviour — see the Browser-verified
+  // reference screens this was built from: Explore (crew picker, Tools Timeline, insight
+  // card, follow-ups, composer), Dashboard (tab bar + KPI tiles), Context ▸ Data (schema
+  // tree), Context ▸ Documents (status switch), Alerts (severity feed), AI Agents
+  // (roster cards), User Management (role pill).
+
+  function setActive(list, el) { list.forEach(function (x) { x.classList.remove('is-active'); }); el.classList.add('is-active'); }
+
+  // 01. Data Connection — pick a source, schema tree relabels
+  (function () {
+    var chips = document.querySelectorAll('#dc-chips .chip');
+    var badge = document.getElementById('dc-badge');
+    var label = document.getElementById('dc-label');
+    if (!chips.length) return;
+    var meta = {
+      bigquery:   { short: 'BQ',  name: 'star-capital-analytics', color: '#4C96F7' },
+      databricks: { short: 'DB',  name: 'lakehouse_prod',         color: '#E45A18' },
+      snowflake:  { short: 'SF',  name: 'ANALYTICS_WH',           color: '#2CA7E4' },
+      redshift:   { short: 'RS',  name: 'reporting_cluster',      color: '#E437AE' },
+      file:       { short: '📄', name: 'q3_board_pack.xlsx',      color: '#714FBA' }
+    };
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        setActive(chips, c);
+        var m = meta[c.dataset.src];
+        badge.textContent = m.short;
+        badge.style.background = m.color;
+        label.textContent = m.name;
+      });
+    });
+    var first = meta.bigquery;
+    badge.style.background = first.color;
+  })();
+
+  // 02. Knowledge base — flip the status switch to publish a draft
+  (function () {
+    var sw = document.getElementById('kb-switch');
+    var status = document.getElementById('kb-status');
+    if (!sw) return;
+    sw.addEventListener('click', function () {
+      var nowActive = sw.classList.toggle('is-active');
+      status.textContent = nowActive ? 'Active' : 'Draft';
+      status.className = 'kb-status ' + (nowActive ? 'active' : 'draft');
+    });
+  })();
+
+  // 03. CoPilot — crew switch, tools timeline, follow-ups
+  (function () {
+    var crewChips = document.querySelectorAll('#cp-crew-row .cp-avatar');
+    var answer = document.getElementById('cp-answer');
+    var composerName = document.getElementById('cp-composer-name');
+    var composerPillName = document.getElementById('cp-composer-pill-name');
+    var composerDot = document.getElementById('cp-composer-dot');
+    var lines = {
+      analyst: { name: 'Analyst', color: 'var(--hz-blue-500)', text: 'Q3 gross margin was 61.4%, about 4pts above the SaaS benchmark I pulled from your last board deck + public filings.' },
+      cfo:     { name: 'CFO',     color: 'var(--hz-green-500)', text: 'Q3 gross margin of 61.4% keeps us inside the FY bridge — no action needed, but COGS variance is worth a line item next review.' },
+      cmo:     { name: 'CMO',     color: 'var(--hz-magenta-400)', text: 'Margin holding at 61.4% gives us room — worth testing a push into the channel that drove last quarter\'s CAC improvement.' }
+    };
+    if (crewChips.length) {
+      crewChips.forEach(function (c) {
+        c.addEventListener('click', function () {
+          setActive(crewChips, c);
+          var m = lines[c.dataset.crew];
+          answer.textContent = m.text;
+          composerName.textContent = m.name;
+          composerPillName.textContent = m.name;
+          composerDot.textContent = c.querySelector('.cp-initials').textContent;
+          composerDot.style.background = m.color;
+        });
+      });
+    }
+
+    var toggle = document.getElementById('cp-toggle');
+    var steps = document.getElementById('cp-steps');
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        var open = steps.classList.toggle('is-open');
+        toggle.textContent = (open ? '▾ Hide reasoning' : '▸ Show reasoning (3 steps)');
+      });
+    }
+
+    document.querySelectorAll('.cp-followup').forEach(function (f) {
+      f.addEventListener('click', function () {
+        answer.textContent = 'Here\'s the breakdown for "' + f.textContent.replace('↻ ', '') + '" — pulled from the same scoped query, no re-authoring needed.';
+        answer.classList.remove('story-fade'); void answer.offsetWidth; answer.classList.add('story-fade');
+      });
+    });
+  })();
+
+  // 04. Charts — KPI tile swap + chart type swap (pure SVG, no deps)
+  (function () {
+    var mount = document.getElementById('chart-demo');
+    var typeChips = document.querySelectorAll('#chart-chips .chip');
+    var kpiTiles = document.querySelectorAll('#kpi-row .kpi-tile');
+    var badge = document.getElementById('chart-badge');
+    if (!mount) return;
+    var series = {
+      revenue: [38, 52, 44, 61, 58, 70],
+      ebitda:  [22, 26, 24, 30, 29, 34]
+    };
+    var currentKpi = 'revenue', currentType = 'bar';
+    var W = 280, H = 110, pad = 8;
+
+    function render() {
+      var data = series[currentKpi];
+      var stepX = (W - pad * 2) / (data.length - 1);
+      var maxV = Math.max.apply(null, data);
+      var pts = data.map(function (v, i) { return [pad + i * stepX, H - pad - (v / maxV) * (H - pad * 2)]; });
+      var primary = getComputedStyle(document.body).getPropertyValue('--hz-horizon-primary-dark').trim() || '#1F5FE0';
+      var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">';
+      if (currentType === 'bar') {
+        var bw = stepX * 0.55;
+        data.forEach(function (v, i) {
+          var h = (v / maxV) * (H - pad * 2);
+          svg += '<rect x="' + (pts[i][0] - bw / 2) + '" y="' + (H - pad - h) + '" width="' + bw + '" height="' + h + '" rx="3" fill="' + primary + '" opacity="0.85" style="animation-delay:' + (i * 35) + 'ms"/>';
+        });
+      } else {
+        var d = 'M ' + pts.map(function (p) { return p[0] + ' ' + p[1]; }).join(' L ');
+        if (currentType === 'area') {
+          svg += '<path d="' + d + ' L ' + pts[pts.length - 1][0] + ' ' + H + ' L ' + pts[0][0] + ' ' + H + ' Z" fill="' + primary + '" opacity="0.14"/>';
+        }
+        svg += '<path class="is-line" d="' + d + '" fill="none" stroke="' + primary + '" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+        pts.forEach(function (p, i) { svg += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="3" fill="' + primary + '" style="animation-delay:' + (i * 40 + 250) + 'ms"/>'; });
+      }
+      svg += '</svg>';
+      mount.innerHTML = svg;
+      badge.textContent = 'Comparison · ' + currentType.charAt(0).toUpperCase() + currentType.slice(1);
+
+      // Draw the line in: measure the real path length, then animate the dash offset to 0.
+      var linePath = mount.querySelector('path.is-line');
+      if (linePath) {
+        var len = linePath.getTotalLength();
+        linePath.style.strokeDasharray = len;
+        linePath.style.strokeDashoffset = len;
+        linePath.getBoundingClientRect(); // force layout before transitioning
+        requestAnimationFrame(function () { linePath.style.strokeDashoffset = '0'; });
+      }
+    }
+    render();
+    kpiTiles.forEach(function (t) {
+      t.addEventListener('click', function () { setActive(kpiTiles, t); currentKpi = t.dataset.kpi; render(); });
+    });
+    typeChips.forEach(function (c) {
+      c.addEventListener('click', function () { setActive(typeChips, c); currentType = c.dataset.chart; render(); });
+    });
+  })();
+
+  // 05. Dashboard — tab bar swaps the KPI grid
+  (function () {
+    var tabs = document.querySelectorAll('#dash-tabs .dash-tab');
+    var grid = document.getElementById('dash-grid');
+    if (!tabs.length) return;
+    var panels = {
+      finance: [
+        ['Revenue (MTD)', '$4.82M', '+12.3%', 'up', true],
+        ['Gross Margin', '61.4%', '+1.1pt', 'up'],
+        ['EBITDA', '$1.1B', '+8.7%', 'up']
+      ],
+      ops: [
+        ['Uptime', '99.97%', '+0.02pt', 'up', true],
+        ['Open Incidents', '3', '-2', 'up'],
+        ['Avg Resolve Time', '41m', '+6m', 'down']
+      ],
+      people: [
+        ['Headcount', '1,284', '+18', 'up', true],
+        ['Attrition', '2.1%', '-0.3pt', 'up'],
+        ['Open Roles', '24', '+4', 'down']
+      ]
+    };
+    function render(tab) {
+      grid.innerHTML = panels[tab].map(function (row) {
+        return '<div class="dash-tile' + (row[4] ? ' wide' : '') + '">' + row[0] +
+          '<strong>' + row[1] + '</strong><em class="' + row[3] + '">' + (row[3] === 'up' ? '↑ ' : '↓ ') + row[2] + '</em></div>';
+      }).join('');
+    }
+    render('finance');
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { setActive(tabs, t); render(t.dataset.tab); });
+    });
+  })();
+
+  // 06. Story — revise narrative (whole-document swap, not a word edit)
+  (function () {
+    var btn = document.getElementById('story-revise');
+    var text = document.getElementById('story-text');
+    if (!btn) return;
+    var revised = false;
+    var versions = [
+      'Revenue grew steadily this quarter, with margin holding firm despite modest headwinds in churn.',
+      'Churn rose 0.4pts in the SMB tier this quarter — the headline, even as revenue and margin both held steady.'
+    ];
+    btn.addEventListener('click', function () {
+      revised = !revised;
+      text.classList.remove('story-fade'); void text.offsetWidth; text.classList.add('story-fade');
+      text.textContent = versions[revised ? 1 : 0];
+      btn.textContent = revised ? '↩ Revert' : '✎ Revise: "lead with churn"';
+    });
+  })();
+
+  // 07. Multi Agents — roster card switch
+  (function () {
+    var chips = document.querySelectorAll('#agent-picker .cp-avatar');
+    var cards = document.querySelectorAll('.agent-card');
+    if (!chips.length) return;
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () {
+        setActive(chips, c);
+        cards.forEach(function (card) {
+          card.classList.toggle('is-shown', card.dataset.agentCard === c.dataset.agent);
+        });
+      });
+    });
+  })();
+
+  // 08. Alert — simulate a new breach arriving in the feed
+  (function () {
+    var btn = document.getElementById('alert-sim');
+    var feed = document.getElementById('alert-feed');
+    if (!btn) return;
+    var fired = false;
+    btn.addEventListener('click', function () {
+      if (fired) return;
+      fired = true;
+      var row = document.createElement('div');
+      row.className = 'alert-row critical is-new';
+      row.innerHTML = '<div class="alert-main"><span class="alert-title">Daily sign-ups dropped below 500</span>' +
+        '<span class="alert-sub">Critical · Growth · Acquisition <span class="meta">· just now</span></span></div><span class="alert-unread"></span>';
+      feed.prepend(row);
+      btn.textContent = '✓ Alert sent to #growth-alerts';
+      btn.disabled = true;
+    });
+  })();
+
+  // 09. RBAC — switch role, update avatar pill + capability table
+  (function () {
+    var chips = document.querySelectorAll('#rbac-roles .chip');
+    var table = document.getElementById('rbac-table');
+    var pill = document.getElementById('rbac-pill');
+    var avatar = document.getElementById('rbac-avatar');
+    if (!chips.length) return;
+    var roles = {
+      viewer:     { label: 'Viewer',     bg: 'var(--hz-surface-subtle)', fg: 'var(--hz-text-secondary)', avatar: '#8490A1', caps: { view: true,  edit: false, manage: false, billing: false } },
+      editor:     { label: 'Editor',     bg: 'var(--hz-green-100)',      fg: 'var(--hz-green-800)',      avatar: '#21C48B', caps: { view: true,  edit: true,  manage: false, billing: false } },
+      admin:      { label: 'Admin',      bg: 'var(--hz-horizon-primary-pale)', fg: 'var(--hz-horizon-primary-dark)', avatar: '#4C96F7', caps: { view: true,  edit: true,  manage: true,  billing: 'view' } },
+      superadmin: { label: 'SuperAdmin', bg: 'var(--hz-purple-100)',     fg: 'var(--hz-purple-800)',      avatar: '#714FBA', caps: { view: false, edit: false, manage: false, billing: true } }
+    };
+    function render(role) {
+      var r = roles[role];
+      pill.textContent = r.label;
+      pill.style.background = r.bg;
+      pill.style.color = r.fg;
+      avatar.style.background = r.avatar;
+      Object.keys(r.caps).forEach(function (key) {
+        var cell = table.querySelector('[data-cap="' + key + '"]');
+        var v = r.caps[key];
+        if (v === true) { cell.textContent = '✓ Yes'; cell.className = 'rbac-yes'; }
+        else if (v === 'view') { cell.textContent = 'View only'; cell.className = ''; }
+        else { cell.textContent = '— No'; cell.className = 'rbac-no'; }
+      });
+    }
+    render('editor');
+    chips.forEach(function (c) {
+      c.addEventListener('click', function () { setActive(chips, c); render(c.dataset.role); });
+    });
+  })();
+</script>
+</body>
+</html>
